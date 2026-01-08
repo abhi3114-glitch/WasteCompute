@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>WasteCompute</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<div class="hero">
-  <h1>GreenCompute</h1>
-  <p>Secure Marketplace for Idle Compute</p>
-  <a href="dashboard.html" class="btn">Open Dashboard</a>
-</div>
+  <header>
+    <h2>WasteCompute</h2>
+    <a href="dashboard.html" class="btn"
+      style="background: transparent; color: var(--text-secondary); border: 1px solid var(--border-subtle); padding: 8px 16px;">Log
+      in</a>
+  </header>
 
+  <div class="hero">
+    <div class="hero-content">
+      <div class="section-title">Secure Compute Marketplace</div>
+      <h1>Monetize your idle<br>infrastructure.</h1>
+      <p>WasteCompute enables enterprises to securely resell unused execution windows to verified buyers with
+        hardware-level isolation.</p>
+      <div style="display: flex; gap: 16px;">
+        <a href="dashboard.html" class="btn">Start Selling</a>
+        <a href="docs.html" class="btn secondary-btn">Read Documentation</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="canvas-container"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none;"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" src="js/hero_3d.js?v=20"></script>
+  <script type="module" src="js/animations.js?v=20"></script>
 </body>
+
 </html>

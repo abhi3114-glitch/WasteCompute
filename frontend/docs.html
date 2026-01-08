@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Documentation - WasteCompute</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .docs-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px 48px;
+        }
+
+        .docs-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .docs-container .version {
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+
+        .docs-container h2 {
+            font-size: 1.5rem;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .docs-container p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>WasteCompute</h2>
+        <a href="index.html" class="btn"
+            style="background: transparent; color: var(--text-secondary); border: 1px solid var(--border-subtle); padding: 8px 16px;">Home</a>
+    </header>
+
+    <div class="docs-container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <h1>WasteCompute</h1>
+        <p class="version">Official Product Documentation — Version 1.0</p>
+
+        <h2>1. Overview</h2>
+        <p>WasteCompute is a distributed compute marketplace that enables enterprises to monetize unused CPU and GPU
+            capacity. The platform securely exposes idle compute windows to verified buyers, allowing execution of
+            approved workloads under strict isolation and policy enforcement.</p>
+
+        <h2>2. Problem Statement</h2>
+        <p>Enterprises significantly overprovision compute resources to handle peak workloads. During off-peak periods,
+            a large percentage of this infrastructure remains idle, resulting in substantial financial waste. Existing
+            tools focus on monitoring or cost reporting, but none enable safe resale of unused compute capacity.</p>
+
+        <h2>3. Solution</h2>
+        <p>WasteCompute introduces a secure compute exchange where idle enterprise infrastructure can be temporarily
+            allocated to external workloads. The platform ensures strong isolation, policy-driven execution, and
+            real-time risk controls, transforming unused capacity into revenue.</p>
+
+        <h2>4. System Architecture</h2>
+        <p>The system consists of four primary components: Enterprise Agent, Marketplace Scheduler, Secure Execution
+            Runtime, and Billing & Audit Layer. The Enterprise Agent detects idle compute windows and publishes
+            availability metadata. The Scheduler matches buyer workloads to available resources. The Runtime enforces
+            sandboxing, time limits, and security policies. The Billing Layer tracks usage and handles settlements.</p>
+
+        <h2>5. Security Model</h2>
+        <p>All workloads execute within isolated environments using hardware-backed security. Network access is
+            restricted by default. Data persistence is disabled unless explicitly permitted. Workloads are terminated
+            automatically upon policy violation or time expiration.</p>
+
+        <h2>6. GPU Features</h2>
+        <p>WasteCompute provides first-class GPU support for AI/ML workloads. Features include CUDA and ROCm runtime
+            compatibility, VRAM monitoring and allocation controls, multi-GPU job distribution, and priority queuing for
+            GPU-intensive tasks. Supported hardware includes NVIDIA datacenter GPUs (A100, H100, RTX 4090/5090) and AMD
+            Instinct accelerators.</p>
+
+        <h2>7. Revenue Model</h2>
+        <p>WasteCompute operates on a marketplace take-rate model. Enterprises earn revenue from sold compute hours,
+            while WasteCompute retains a percentage as platform fees. Additional enterprise plans provide enhanced
+            security controls, compliance reporting, and priority scheduling.</p>
+
+        <h2>8. Target Customers</h2>
+        <p>Primary sellers include enterprises, universities, research institutions, and data centers. Primary buyers
+            include AI startups, research labs, analytics teams, and simulation workloads requiring cost-effective
+            compute resources.</p>
+
+        <h2>9. Compliance and Governance</h2>
+        <p>The platform supports audit logs, workload traceability, and policy enforcement suitable for enterprise and
+            regulatory requirements. All executions are fully logged for forensic review.</p>
+
+        <h2>10. Future Roadmap</h2>
+        <p>Planned enhancements include dynamic pricing models, GPU partitioning support, regional compliance controls,
+            and deeper integration with cloud and on-prem orchestration systems.</p>
+    </div>
+
+</body>
+
+</html>

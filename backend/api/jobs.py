@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from backend.database.models import JobRequest
 from backend.scheduler.scheduler import schedule_job
-from backend.database.db import job_db
+from backend.database import db
 
 router = APIRouter()
 
@@ -11,4 +11,4 @@ def submit_job(job: JobRequest):
 
 @router.get("/history/")
 def job_history():
-    return job_db
+    return db.get_jobs()

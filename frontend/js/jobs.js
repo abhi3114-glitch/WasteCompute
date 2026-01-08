@@ -1,11 +1,15 @@
 async function submitJob() {
-  const cmd = document.getElementById("jobCmd").value;
+  const cmdInput = document.getElementById("jobCommand");
+  const resourceSelect = document.getElementById("resourceType");
+  if (!cmdInput) return;
+  const cmd = cmdInput.value;
+  const resourceType = resourceSelect ? resourceSelect.value : "cpu";
   const outputBox = document.getElementById("jobOutput");
 
   outputBox.textContent = "Running...";
 
   try {
-    const result = await apiPost("/jobs/submit", { command: cmd });
+    const result = await apiPost("/jobs/submit", { command: cmd, resource_type: resourceType });
 
     if (result.status === "error" || result.error) {
       outputBox.textContent = result.message || result.error;
@@ -25,19 +29,25 @@ async function submitJob() {
 
 
 async function loadJobHistory() {
-  const jobs = await apiGet("/jobs/history");
-  const table = document.getElementById("jobTable");
+  const table = document.getElementById("jobHistory");
+  if (!table) return; // Guard clause
 
-  table.innerHTML = "";
+  const container = table.querySelector("tbody");
+  if (!container) return; // Guard clause
 
-  jobs.forEach(job => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${job.job_id}</td>
-      <td>${job.node_id}</td>
-      <td>${job.status}</td>
-      <td>${job.execution_time}s</td>
-    `;
-    table.appendChild(row);
-  });
+  try {
+    const history = await apiGet("/jobs/history");
+    container.innerHTML = history.map(job => `
+        <tr>
+          <td>${job.job_id}</td>
+          <td>${job.node_id}</td>
+          <td style="text-transform: uppercase; font-weight: 500; color: ${job.resource_type === 'gpu' ? '#00ffff' : '#4ade80'}">${job.resource_type || 'cpu'}</td>
+          <td style="font-family: monospace; color: var(--text-primary)">${job.command}</td>
+          <td><span class="status-dot ${job.status}"></span> ${job.status}</td>
+      <td style="font-family: monospace; font-size: 12px; color: var(--text-secondary)">${(job.output || "").toString().substring(0, 50)}...</td>
+        </tr>
+      `).join("");
+  } catch (e) {
+    console.warn("Failed to load job history", e);
+  }
 }

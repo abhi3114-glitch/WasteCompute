@@ -1,20 +1,25 @@
-from billing.pricing import (
-    CPU_COST_PER_SEC,
-    RAM_COST_PER_MB_SEC,
-    PLATFORM_FEE_PERCENT
-)
+from billing.pricing import calculate_job_cost
 
-def calculate_cost(cpu_seconds: float, ram_mb_seconds: float):
-    base_cost = (
-        cpu_seconds * CPU_COST_PER_SEC +
-        ram_mb_seconds * RAM_COST_PER_MB_SEC
-    )
-
-    platform_fee = (PLATFORM_FEE_PERCENT / 100) * base_cost
-    total = round(base_cost + platform_fee, 2)
-
-    return {
-        "base_cost": round(base_cost, 2),
-        "platform_fee": round(platform_fee, 2),
-        "total_cost": total
-    }
+def calculate_compute_cost(usage_records: list, rate_per_second: float = 0.05):
+    """
+    Convert raw usage records into billed transactions using dynamic pricing.
+    """
+    transactions = []
+    
+    for record in usage_records:
+        resource_type = record.get('resource_type', 'cpu')
+        cpu_seconds = record.get('cpu_seconds', 0)
+        ram_mb = record.get('ram_mb', 128)  # Default 128MB
+        
+        # Use dynamic pricing model
+        cost_breakdown = calculate_job_cost(cpu_seconds, ram_mb, resource_type)
+        
+        transactions.append({
+            "id": f"tx_{record['job_id']}",
+            "reference": f"Job #{record['job_id']} ({record['node_id']})",
+            "usage": f"{cpu_seconds}s ({resource_type.upper()})",
+            "resource_type": resource_type,
+            "cost": cost_breakdown
+        })
+        
+    return transactions
