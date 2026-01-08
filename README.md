@@ -374,13 +374,6 @@ Peak hours: 9:00-11:00, 14:00-16:00 (local time)
 
 ---
 
-## Team
-
-| Name | Role |
-|------|------|
-| Rakshit V | Lead Developer |
-| Abhishek | Engineering |
-
 ---
 
 ## License
